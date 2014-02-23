@@ -59,6 +59,13 @@ class DSTAT {
 		return $result_array;
 	}
 
+	public function getNonKeyValueText() {
+		$result = null;
+		$result  = preg_replace($this->generateKeyRegex(), "", $this->text);
+		$result  = preg_replace($this->generateValueRegex(), "", $result);
+		return trim($result);
+	}
+
 	private function generateKeyRegex() {
 		$delim = $this->delimiter["key"];
 		$escaped_delim = preg_quote($delim, $delim);
@@ -88,7 +95,6 @@ class DSTAT {
 		$escaped_delim = preg_quote($delim, $delim);
 		return preg_replace("/^[".$escaped_delim."]{".$delim_count."}[^".$escaped_delim."]/sm", "", $text);
 	}
-
 }
 
 $example_text_1 = "
@@ -100,6 +106,9 @@ test test test
 ^^^ Test test test
 test test test
 ^^^
+
+ Asdasdkasd
+ a
 ";
 
 $example_text_2 = "
@@ -124,3 +133,4 @@ var_dump($test->getDelimiter());
 var_dump($test->getKeys());
 var_dump($test->getValues());
 var_dump($test->getBoth());
+var_dump($test->getNonKeyValueText());
