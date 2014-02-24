@@ -45,6 +45,7 @@ echo "<p><b>Original Text: </b>" .
 var_dump($dstat->getKeys());
 var_dump($dstat->getValues());
 var_dump($dstat->getBoth());
+var_dump($dstat->getBoth(true));
 
 ?>
 
@@ -61,10 +62,10 @@ var_dump($dstat->getBoth());
 <?php 
 
 $example_string = "
-`` name
+`` full_name
 ```` Bob Smith ````
 
-`` date
+`` date_create
 ```` February 23, 2014 ````
 
 `` description
@@ -93,3 +94,4 @@ echo "<p><b>Original Text: </b>" .
 var_dump($dstat->getKeys());
 var_dump($dstat->getValues());
 var_dump($dstat->getBoth());
+var_dump($dstat->getBoth(true));

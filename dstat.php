@@ -59,10 +59,14 @@ class DSTAT {
 		return $this->keys;
 	}
 
-	public function getBoth() {
+	public function getBoth($prettify = false) {
 		$result_array = array();
-		for($i = 0; $i < count($this->keys); $i++) {
-			$result_array[$this->keys[$i]] = $this->values[$i];
+		$keys = $this->keys;
+		if($prettify) {
+			$keys = array_map(array(__CLASS__,"pretifyKey"), $this->keys);
+		}
+		for($i = 0; $i < count($keys); $i++) {
+			$result_array[$keys[$i]] = $this->values[$i];
 		}
 		return $result_array;
 	}
@@ -102,5 +106,10 @@ class DSTAT {
 		$delim_count = strlen($delim);
 		$escaped_delim = preg_quote($delim, $delim);
 		return preg_replace("/^[".$escaped_delim."]{".$delim_count."}[^".$escaped_delim."]/sm", "", $text);
+	}
+
+	private function pretifyKey($key) {
+		$result = str_replace('_', ' ', $key);
+		return ucwords($result);
 	}
 }
