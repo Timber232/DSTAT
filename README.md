@@ -4,7 +4,7 @@ DSTAT
 Delimited String To Array Toolkit
 
 # Example Code: #
-
+```php
     $example_string = "
     ^ name
     ^^^ Bob Smith ^^^
@@ -38,3 +38,4 @@ Delimited String To Array Toolkit
     var_dump($dstat->getKeys());
     var_dump($dstat->getValues());
     var_dump($dstat->getBoth());
+```
