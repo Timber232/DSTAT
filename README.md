@@ -3,7 +3,8 @@ DSTAT
 
 Delimited String To Array Toolkit
 
-## Example Code: ##
+### Example Code: ###
+
 ```php
     $example_string = "
     ^ name
