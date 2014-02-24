@@ -28,27 +28,35 @@ class DSTAT {
 				break;
 		}
 		$this->delimiter = compact('key', 'value');
-		$this->keys = $this->getKeys();
-		$this->values = $this->getValues();
+		$this->setKeys();
+		$this->setValues();
 	}
 
 	public function getDelimiter() {
 		return $this->delimiter;
 	}
 
-	public function getKeys() {
+	private function setKeys() {
 		$output_key = null;
 		// preg_match_all("/^[\^][^\^]\b\w*/sm", $this->text, $output_key);
 		preg_match_all($this->generateKeyRegex(), $this->text, $output_key);
 		$result = array_map(array(__CLASS__, "removeKeyDelimiter"), $output_key);
-		return $result[0];
+		$this->keys = $result[0];
 	}
 
-	public function getValues() {
+	private function setValues() {
 		$output_value = null;
 		// preg_match_all("/^[\^]{3}(.*?)[\^]{3}/sm", $this->text, $output_value);
 		preg_match_all($this->generateValueRegex(), $this->text, $output_value);
-		return array_map("trim", $output_value[1]);
+		$this->values = array_map("trim", $output_value[1]);
+	}
+
+	public function getKeys() {
+		return $this->keys;
+	}
+
+	public function getValues() {
+		return $this->keys;
 	}
 
 	public function getBoth() {
