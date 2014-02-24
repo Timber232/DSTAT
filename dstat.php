@@ -46,7 +46,7 @@ class DSTAT {
 
 	public function getValues() {
 		$output_value = null;
-		preg_match_all("/^[\^]{3}(.*?)[\^]{3}/sm", $this->text, $output_value);
+		// preg_match_all("/^[\^]{3}(.*?)[\^]{3}/sm", $this->text, $output_value);
 		preg_match_all($this->generateValueRegex(), $this->text, $output_value);
 		return array_map("trim", $output_value[1]);
 	}
